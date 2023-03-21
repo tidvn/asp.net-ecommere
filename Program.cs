@@ -1,7 +1,50 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using AspNetCore.Identity.MongoDbCore.Infrastructure;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using TDStore.Models;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
+var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+builder.Services.AddMvc()
+        .AddSessionStateTempDataProvider();
+builder.Services.AddSession();
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+})
+    .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+    options.AccessDeniedPath = "/Forbidden/";
+});
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings  
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(50);
+
+    options.LoginPath = "/";     //set the login path.  
+    options.AccessDeniedPath = "/AccessDenied";
+    options.SlidingExpiration = true;
+});
+
+// builder.Services.AddSingleton<ProductsService>();
+// builder.Services.AddSingleton<ImagesService>();
+
 
 var app = builder.Build();
 
@@ -18,8 +61,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseSession();
 
 app.MapAreaControllerRoute(
             name: "default",
