@@ -350,6 +350,7 @@ node_modules/
 **/*.DesktopClient/ModelManifest.xml
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
+**/.vscode
 _Pvt_Extensions
 
 # Paket dependency manager
@@ -403,5 +404,3 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-
-.vscode

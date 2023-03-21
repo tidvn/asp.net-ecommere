@@ -7,6 +7,7 @@
       "**/bin": true,
       "**/.vs": true,
       "**/Properties": true,
-      "**/obj": true
+      "**/obj": true,
+      "**/*.md": true
    }
 }
