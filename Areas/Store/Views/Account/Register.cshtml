@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ShopGrids - Bootstrap 5 eCommerce HTML Template.</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.svg" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="~/Shopgrids/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Shopgrids/css/LineIcons.css" />
+    <link rel="stylesheet" href="~/Shopgrids/css/main.css" />
+
+</head>
+
+<body>
+
+    <div class="account-login section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                    <div class="register-form">
+                        <div class="title">
+                            <h3>No Account? Register</h3>
+                            <p>Registration takes less than a minute but gives you full control over your orders.</p>
+                        </div>
+                        <form class="row" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="reg-fn">User Name</label>
+                                    <input class="form-control" name="username" type="text" id="reg-un" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reg-ln">First Name</label>
+                                    <input class="form-control" name="firstname" type="text" id="reg-fn" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reg-ln">Last Name</label>
+                                    <input class="form-control" name="lastname" type="text" id="reg-ln" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reg-email">E-mail Address</label>
+                                    <input class="form-control" name="email" type="email" id="reg-em" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reg-phone">Phone Number</label>
+                                    <input class="form-control" name="Phone" type="text" id="reg-pn" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reg-pass">Password</label>
+                                    <input class="form-control" name="password" type="password" id="reg-ps" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reg-pass-confirm">Confirm Password</label>
+                                    <input class="form-control" name="password2" type="password" id="reg-ps-confirm" required="">
+                                </div>
+                            </div>
+                            <div class="button">
+                                <button class="btn" type="submit">Register</button>
+                            </div>
+                            <p class="outer-link">
+                                Already have an account? <a asp-area="Store" asp-controller="Account" asp-action="Login">Login Now</a>
+                            </p>
+                        </form>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                         @if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-success" role="alert">@ViewBag.Message</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================= JS here ========================= -->
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+

@@ -13,4 +13,15 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.5" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
   </ItemGroup>
+
+  <ItemGroup>
+  <Folder Include="Areas\Store\Controllers\" />
+  <Folder Include="Areas\Store\Models\" />
+  <Folder Include="Areas\Store\Views\" />
+  <Folder Include="Areas\Admin\Controllers\" />
+  <Folder Include="Areas\Admin\Models\" />
+  <Folder Include="Areas\Admin\Views\" />
+  <Folder Include="Views\Shared\Plainadmin\" />
+  <Folder Include="Views\Shared\Shopgrids\" />
+</ItemGroup>
 </Project>

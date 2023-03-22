@@ -1,4 +1,7 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using TDStore.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 <header class="header navbar-area">
     <!-- Start Topbar -->
     <div class="topbar">
@@ -17,15 +20,34 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-end">
                         <div class="user">
-                            <ul class="user-login">
-                                <li>
-                                    <a asp-area="Shop" asp-controller="Account" asp-action="Login">Login</a>
-                                </li>
-                                <li>
-                                    <a asp-area="Shop" asp-controller="Account" asp-action="Register">Register</a>
-                                </li>
-                            </ul>
+                        @{
+                            if (User?.Identity?.IsAuthenticated ?? false)
+                            {
+                               <i class="lni lni-user"></i>
+                                    @UserManager.GetUserAsync(User).Result?.UserName
+                                   
+                                    if (User.IsInRole("Staff"))
+                                     {
+                                   <a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+
+                                     }
+                                    <a asp-area="Store" asp-controller="Account" asp-action="Logout"> ,logout</a>
+                                   
+                            }else{
+                                    <ul class="user-login">
+                                        <li>
+                                            <a asp-area="Store" asp-controller="Account" asp-action="Login">Login</a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Store" asp-controller="Account" asp-action="Register">Register</a>
+                                        </li>
+                                    </ul>
+                            }
+
+                        }
                      </div>   
+                        
+                    </div>  
                         
                     </div>
                 </div>

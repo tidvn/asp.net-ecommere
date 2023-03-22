@@ -7,12 +7,23 @@ namespace TDStore.Models;
     public class ApplicationUser : MongoIdentityUser<Guid>
     {
 
-        public string? FullName { get; set; }
-        public object? Address { get; set; }
-        public object? ShipingAddress { get; set; }
-        public byte[]? Image { get; set;}
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public User_Address[]? address { get; set;}
+        public byte[]? avatar { get; set;}
 
     }
+    public class User_Address
+    {
+        public string? receiver {get;set;}
+        public string? phone {get;set;}
+        public string? addressLine1 { get; set; }
+        public string? addressLine2 { get; set; }
+        public string? city { get; set; }
+        public string? postalCode { get; set; }
+        public string? country { get; set; }
+                
+}
 
 
 
