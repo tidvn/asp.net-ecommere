@@ -31,6 +31,8 @@ public class Product_Inventory
     public string? Id { get; set; }
 
     public string? SKU { get; set; }
+    public string? Color { get; set; }
+    public string? Name { get; set; }
 
     [BsonRepresentation(BsonType.ObjectId)]
     public List<string>? Images { get; set; }
@@ -53,6 +55,7 @@ public class Product_Category
     
 
 }
+
 // public class Product_Discount
 // {
 //     [BsonId]

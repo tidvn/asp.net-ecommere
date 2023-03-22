@@ -5,10 +5,10 @@ using TDStore.Models;
 
 namespace TDStore.Service
 {
-    public class ProductsService
+    public class ProductService
     {
         private readonly IMongoCollection<Product> _productCollection;
-        public ProductsService(
+        public ProductService(
         IOptions<MongoDbSettings> MongoDbSettings)
         {
             var mongoClient = new MongoClient(
