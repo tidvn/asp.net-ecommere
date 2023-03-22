@@ -1,6 +1,7 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TDStore.Models;
+using TDStore.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,8 +43,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// builder.Services.AddSingleton<ProductsService>();
-// builder.Services.AddSingleton<ImagesService>();
+builder.Services.AddSingleton<ProductService>();
+builder.Services.AddSingleton<ImagesService>();
 
 
 var app = builder.Build();

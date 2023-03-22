@@ -1,0 +1,252 @@
+      <section class="tab-components">
+        <div class="container">
+          
+          <!-- ========== form-layout-wrapper start ========== -->
+          <div class="form-layout-wrapper mt-20">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                  <h6 class="mb-25">Default Information</h6>
+                  <form method="post">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Name of Product</label>
+                          <input type="text" placeholder="Name">
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Details</label>
+                          <textarea placeholder="Details" rows="5"></textarea>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Category</label>
+                          <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                          <datalist id="datalistOptions">
+                            <option value="San Francisco"></option>
+                            <option value="New York"></option>
+                            <option value="Seattle"></option>
+                            <option value="Los Angeles"></option>
+                            <option value="Chicago"></option>
+                          </datalist>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Features</label>
+                         <textarea placeholder="Features" rows="5"></textarea>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1" id="specifications">
+                          <label>Specifications</label><button type="button" class="btn btn-primary mb-3" onclick="addKeyValue()">Add</button>
+                         <div class="input-group my-1" >                      
+                        <input type="text" name="key[]" placeholder="Key"  class="form-control" >
+                        <input type="text" name="value[]" placeholder="Value"  class="form-control" >
+                        <button class="btn btn-outline-secondary delete-btn" type="button"><i class="lni lni-trash-can"></i></button>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1" >
+                        <label>Inventory</label>
+                        <button type="button" class="btn btn-primary mb-3" onclick="addInv()">Add</button>
+                          <div class="table-responsive">
+                            <table class="table top-selling-table" id="inventorys">
+                              <thead>
+                                <tr>
+                                  <th>
+                                    <h6 class="text-sm text-medium">Name</h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      SKU
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Color
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Images
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Quantily
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Price
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      % Discount
+                                    </h6>
+                                  </th>
+                                  
+                                  </th>
+                                  <th>
+                                    <h6 class="text-sm text-medium text-end">
+                                      Actions
+                                    </h6>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <div class="product">                                      
+                                      <p class="text-sm">
+                                        <input class="form-control" type="text" >
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <input class="form-control" type="text" >
+                                  </td>
+                                  
+                                  <td>
+                                    <input class="form-control" type="text" >
+                                      
+                                  </td>
+                                  <td> 
+                                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                </td>
+                                <td>
+                                  <input class="form-control" type="text" >
+                                </td>
+                                <td>
+                                  <input class="form-control" type="text" >
+                                </td>
+                                <td>
+                                  <input class="form-control" type="text" >
+                                </td>
+                                  <td>
+                                    <div class="action justify-content-end">
+                                      <button class="edit">
+                                        <i class="lni lni-pencil"></i>
+                                      </button>
+                                      <button class="Remove delete-Inv">
+                                        <i class="lni lni-trash-can"></i>
+                                      </button>
+                                      
+                                    </div>
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                            <!-- End Table -->
+                          
+                        </div>
+                      </div>
+                      </div>
+                      
+                    <!-- end row -->
+                    <button type="submit" class="btn btn-success">Save</button>
+                  </form>
+                </div>
+                <!-- end card -->
+  
+              </div>
+              <!-- end col -->
+  
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== form-layout-wrapper end ========== -->
+        </div>
+        <!-- end container -->
+      </section>
+
+          <script>
+      $(document).on("click", ".delete-btn", function() {
+$(this).parent().remove();
+});
+
+
+function addKeyValue() {
+var specificationsDiv = $("#specifications");
+
+var newDiv = $("<div></div>").addClass("input-group my-1");
+
+
+var keyInput = $("<input></input>").attr("type", "text").attr("name", "key[]").attr("placeholder", "Key").addClass("form-control").prop("required", true);
+
+var valueInput = $("<input></input>").attr("type", "text").attr("name", "value[]").attr("placeholder", "Value").addClass("form-control").prop("required", true);
+
+var deleteBtn = $("<button></button>").attr("type", "button").addClass("btn btn-outline-secondary delete-btn").append($("<i></i>").addClass("lni lni-trash-can"));
+
+newDiv.append(keyInput);
+newDiv.append(valueInput);
+newDiv.append(deleteBtn);
+
+specificationsDiv.append(newDiv);
+}
+
+
+
+$(document).on("click", ".delete-Inv", function() {
+$(this).parent().parent().parent().remove();
+});
+function addInv() {
+var Table = $("#inventorys  > tbody:last-child");
+var Row=
+'<tr>'+
+'                                  <td>'+
+'                                    <div class="product">                                      '+
+'                                      <p class="text-sm">'+
+'                                        <input class="form-control" type="text" >'+
+'                                      </p>'+
+'                                    </div>'+
+'                                  </td>'+
+'                                  <td>'+
+'                                    <input class="form-control" type="text" >'+
+'                                  </td>'+
+'                                  '+
+'                                  <td>'+
+'                                    '+
+'                                   <input class="form-control" type="text" > '+
+'                                      '+
+'                                  </td>'+
+'                                  <td> '+
+'                                    <input class="form-control" type="file" id="formFileMultiple" multiple>'+
+'                                </td>'+
+'                                <td>'+
+'                                  <input class="form-control" type="text" >'+
+'                                </td>'+
+'                                <td>'+
+'                                  <input class="form-control" type="text" >'+
+'                                </td>'+
+'                                <td>'+
+'                                  <input class="form-control" type="text" >'+
+'                                </td>'+
+'                                  <td>'+
+'                                    <div class="action justify-content-end">'+
+'                                      <button class="edit">'+
+'                                        <i class="lni lni-pencil"></i>'+
+'                                      </button>'+
+'                                      <button class="Remove delete-Inv">'+
+'                                        <i class="lni lni-trash-can"></i>'+
+'                                      </button>'+
+'                                      '+
+'                                    </div>'+
+'                                  </td>'+
+'                                </tr>';
+	
+
+Table.append(Row );
+}
+</script>
