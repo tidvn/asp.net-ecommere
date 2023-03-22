@@ -1,9 +1,8 @@
 # asp.net-ecommere
 ```
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
+git add .
+git commit -m "mieu ta update"
+git branch -M Name
 git remote add origin https://github.com/tidvn/asp.net-ecommere.git
-git push -u origin main
+git push -u origin Name
 ```

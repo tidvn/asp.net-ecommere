@@ -1,4 +1,7 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using TDStore.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 <div class="container-fluid" >
     <div class="row">
         <div class="col-lg-5 col-md-5 col-6">
@@ -142,9 +145,16 @@
                                 aria-expanded="false">
                                 <div class="profile-info">
                                     <div class="info">
-                                        <h6>
-                                            UserManager.GetUserAsync(User).Result?.FullName
-mn                                        </h6>
+                                        @{
+                                        if (User?.Identity?.IsAuthenticated ?? false)
+                                        {
+                                        <h6>@UserManager.GetUserAsync(User).Result?.UserName</h6>                             
+                                            
+                                        }else{
+                                                <h6>Admin</h6>
+                                        }
+
+                                        }
                                         <div class="image">
                                             <img src="~/Plainadmin/images/profile/profile-image.png"
                                          alt="" />
@@ -173,7 +183,7 @@ mn                                        </h6>
                                     <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
                                 </li>
                                 <li>
-                                    <a class="nav-link text-dark" asp-area="Account" asp-controller="Home" asp-action="Logout">Logout</a>
+                                    <a class="nav-link text-dark" asp-area="Store" asp-controller="Account" asp-action="Logout"><i class="lni lni-exit"></i> Sign Out</a>
                                 </li>
                             </ul>
                         </div>
