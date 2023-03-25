@@ -9,5 +9,6 @@
       "**/Properties": true,
       "**/obj": true,
       "**/*.md": true
-   }
+   },
+   "liveServer.settings.port": 5501
 }

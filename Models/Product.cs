@@ -13,13 +13,16 @@ public class Product
         public string Name { get; set; } = null!;
         public string? Details { get; set; }
         public Dictionary<string,string>? Specifications { get; set; }
-        public List<string>? Features { get; set; }
+        public string? Features { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public List<string>? Category { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public List<string>? Inventory { get; set; }
+        
+        [BsonRepresentation(BsonType.ObjectId)]
+        public List<string>? Images { get; set; }
         
 
         
@@ -29,13 +32,9 @@ public class Product_Inventory
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
-
     public string? SKU { get; set; }
     public string? Color { get; set; }
     public string? Name { get; set; }
-
-    [BsonRepresentation(BsonType.ObjectId)]
-    public List<string>? Images { get; set; }
     public int Quantily { get; set; }
     public decimal Price { get; set; }
     public decimal Discount_Percent { get; set; }
