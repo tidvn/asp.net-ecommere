@@ -1,4 +1,5 @@
-﻿using AspNetCore.Identity.MongoDbCore.Infrastructure;
+﻿// "ConnectionString": "mongodb+srv://phungdung25322:phungdung25322@cluster0.dehs2.mongodb.net",
+using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TDStore.Models;
 using TDStore.Service;
@@ -32,8 +33,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.SlidingExpiration = true;
     options.AccessDeniedPath = "/Forbidden/";
 });
-builder.Services.ConfigureApplicationCookie(options =>
-{
+builder.Services.ConfigureApplicationCookie(options =>{
     // Cookie settings  
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(50);
@@ -44,7 +44,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddSingleton<ProductService>();
-builder.Services.AddSingleton<ImagesService>();
+builder.Services.AddSingleton<ImageService>();
 
 
 var app = builder.Build();
