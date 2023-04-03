@@ -95,36 +95,10 @@ public class ProductController : Controller
         }catch{
             System.Diagnostics.Debug.WriteLine("error add product");
         }
-        return View();
+        List<Product_Category> lst = await _productService.GetAllCategoryAsync();
+        return View(lst);
+        
     }
-    // public IActionResult Add()
-    // {
-    //     return View();
-    // }
-
-    // // POST: Product/Create
-    // [HttpPost]
-    // [ValidateAntiForgeryToken]
-    // public async Task<IActionResult> Add(ProductViewModel viewModel)
-    // {
-    //     if (ModelState.IsValid)
-    //     {
-    //         var product = new ProductT
-    //         {
-    //             Name = viewModel.Name,
-    //             Price = viewModel.Price,
-    //             Inventories = viewModel.Inventories
-    //         };
-
-            
-
-    //         return RedirectToAction(nameof(Index));
-    //     }
-
-    //     return View(viewModel);
-    // }
-    
-
-    
+        
 }
 
