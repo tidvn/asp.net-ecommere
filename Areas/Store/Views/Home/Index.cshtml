@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Shop";
 }
+@model List<TDStore.Areas.Store.Models.ProductView>
 <section class="hero-area">
     <div class="container">
         <div class="row">
@@ -313,11 +314,15 @@
             </div>
         </div>
         <div class="row">
-
+            @foreach(var item in Model)
+            {
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="single-product">
                     <div class="product-image">
-                        <img alt="#" src="~/Shopgrids/images/products/product-1.jpg">
+                        @if(item.Images.Count > 0){
+                      <img alt="#" src="data:@item.Images[0].FileType;base64,@Convert.ToBase64String(item.Images[0].Data)">
+                        }
+                        
                         <span class="new-tag">New</span>
                         <div class="button">
                             <a href="product-details.html" class="btn">
@@ -326,9 +331,9 @@
                         </div>
                     </div>
                     <div class="product-info">
-                        <span class="category">Watches</span>
+                        <span class="category">@item.Category[0].Name</span>
                         <h4 class="title">
-                            <a href="product-grids.html">Xiaomi Mi Band 5</a>
+                            <a href="product-grids.html">@item.Name</a>
                         </h4>
                         <ul class="review">
                             <li>
@@ -351,178 +356,14 @@
                             </li>
                         </ul>
                         <div class="price">
-                            <span>$199.00</span>
+                            <span>@item.List_Inventory[0].Price</span>
                         </div>
                     </div>
                 </div>
             </div>
+            }
 
 
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single-product">
-                    <div class="product-image">
-                        <img alt="#" src="~/Shopgrids/images/products/product-1.jpg">
-                        <span class="new-tag">New</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn">
-                                <i class="lni lni-cart"></i> Add to Cart
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Watches</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                        </h4>
-                        <ul class="review">
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star"></i>
-                            </li>
-                            <li>
-                                <span>4.0 Review(s)</span>
-                            </li>
-                        </ul>
-                        <div class="price">
-                            <span>$199.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-lg-3 col-md-6 col-12">
-                <div class="single-product">
-                    <div class="product-image">
-                        <img alt="#" src="~/Shopgrids/images/products/product-1.jpg">
-                        <span class="new-tag">New</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn">
-                                <i class="lni lni-cart"></i> Add to Cart
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Watches</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                        </h4>
-                        <ul class="review">
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star"></i>
-                            </li>
-                            <li>
-                                <span>4.0 Review(s)</span>
-                            </li>
-                        </ul>
-                        <div class="price">
-                            <span>$199.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-lg-3 col-md-6 col-12">
-                <div class="single-product">
-                    <div class="product-image">
-                        <img alt="#" src="~/Shopgrids/images/products/product-1.jpg">
-                        <span class="new-tag">New</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn">
-                                <i class="lni lni-cart"></i> Add to Cart
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Watches</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                        </h4>
-                        <ul class="review">
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star"></i>
-                            </li>
-                            <li>
-                                <span>4.0 Review(s)</span>
-                            </li>
-                        </ul>
-                        <div class="price">
-                            <span>$199.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="col-lg-3 col-md-6 col-12">
-                <div class="single-product">
-                    <div class="product-image">
-                        <img alt="#" src="~/Shopgrids/images/products/product-1.jpg">
-                        <span class="new-tag">New</span>
-                        <div class="button">
-                            <a href="product-details.html" class="btn">
-                                <i class="lni lni-cart"></i> Add to Cart
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="category">Watches</span>
-                        <h4 class="title">
-                            <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                        </h4>
-                        <ul class="review">
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star-filled"></i>
-                            </li>
-                            <li>
-                                <i class="lni lni-star"></i>
-                            </li>
-                            <li>
-                                <span>4.0 Review(s)</span>
-                            </li>
-                        </ul>
-                        <div class="price">
-                            <span>$199.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>

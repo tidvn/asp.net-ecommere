@@ -43,6 +43,16 @@ namespace TDStore.Service
         public async Task<List<Product_Inventory>> GetAllInventoryAsync() =>
         await _inventoryCollection.Find(_ => true).ToListAsync();
 
+        public async Task<List<Product_Inventory>> GetAllInventoryOfProduct(string idP)
+        {
+            Product p = await GetByIdAsync(idP);
+            List<Product_Inventory> lst = new List<Product_Inventory>();
+            foreach (var inv in p.Inventory){
+                lst.Add( await _inventoryCollection.Find(x => x.Id == inv).FirstOrDefaultAsync());
+            }
+        return lst ;
+        }
+       
         public async Task<Product_Inventory?> GetInventoryByIdAsync(string id) =>
             await _inventoryCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
@@ -57,6 +67,17 @@ namespace TDStore.Service
         // Category
         public async Task<List<Product_Category>> GetAllCategoryAsync() =>
         await _categoryCollection.Find(_ => true).ToListAsync();
+
+        public async Task<List<Product_Category>> GetAllCategoryOfProduct(string idP)
+        {
+            Product p = await GetByIdAsync(idP);
+            List<Product_Category> lst = new List<Product_Category>();
+            foreach (var cate in p.Category){
+                lst.Add( await _categoryCollection.Find(x => x.Id == cate).FirstOrDefaultAsync());
+            }
+        return lst ;
+        }
+       
 
         public async Task<Product_Category?> GetCategoryByIdAsync(string id) =>
             await _categoryCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
