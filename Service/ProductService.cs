@@ -45,7 +45,7 @@ namespace TDStore.Service
 
         public async Task<List<Product_Inventory>> GetAllInventoryOfProduct(string idP)
         {
-            Product p = await GetByIdAsync(idP);
+            Product? p = await GetByIdAsync(idP);
             List<Product_Inventory> lst = new List<Product_Inventory>();
             foreach (var inv in p.Inventory){
                 lst.Add( await _inventoryCollection.Find(x => x.Id == inv).FirstOrDefaultAsync());
@@ -70,7 +70,7 @@ namespace TDStore.Service
 
         public async Task<List<Product_Category>> GetAllCategoryOfProduct(string idP)
         {
-            Product p = await GetByIdAsync(idP);
+            Product? p = await GetByIdAsync(idP);
             List<Product_Category> lst = new List<Product_Category>();
             foreach (var cate in p.Category){
                 lst.Add( await _categoryCollection.Find(x => x.Id == cate).FirstOrDefaultAsync());
