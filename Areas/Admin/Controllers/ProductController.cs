@@ -52,7 +52,6 @@ public class ProductController : Controller
         List<String> listInventory = new List<String>();
         foreach (var file in ImageProduct)
             {
-                 System.Diagnostics.Debug.WriteLine(file.FileName);
                 var fileModel = new ImageData
                 {
                     FileType = file.ContentType,

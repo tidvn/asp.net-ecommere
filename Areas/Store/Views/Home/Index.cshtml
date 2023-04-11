@@ -325,8 +325,8 @@
                         
                         <span class="new-tag">New</span>
                         <div class="button">
-                            <a href="product-details.html" class="btn">
-                                <i class="lni lni-cart"></i> Add to Cart
+                            <a asp-action="Details" asp-area="Store" asp-controller="Product" asp-route-id="@item.Id" class="btn">
+                                <i class="lni lni-cart"></i>Details
                             </a>
                         </div>
                     </div>
