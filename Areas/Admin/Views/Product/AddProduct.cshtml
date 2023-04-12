@@ -163,6 +163,10 @@
                                           <label>Description</label>
                                           <input type="text" id="CategoryDescription" class="form-control">
                                       </div>
+                                                  @if (ViewBag.Message != null)
+                                    {
+                                        <div class="alert alert-success" role="alert">@ViewBag.Message</div>
+                                    }
                                   </form>
                                 </div>
                                 <div class="modal-footer">

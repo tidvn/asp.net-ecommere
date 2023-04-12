@@ -1,5 +1,6 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using TDStore.Models;
 
@@ -27,7 +28,11 @@ namespace TDStore.Service
         // Product
         public async Task<List<Product>> GetAllAsync() =>
         await _productCollection.Find(_ => true).ToListAsync();
-
+        public async Task<List<Product>> SearchProduct(string searchParam) {
+            var filter = new BsonDocument { { "Name", new BsonDocument { { "$regex", searchParam }, { "$options", "i" } } } };
+            var result = _productCollection.Find(filter).ToList();
+            return result;
+        }
         public async Task<Product?> GetByIdAsync(string id) =>
             await _productCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 

@@ -90,6 +90,7 @@ public class ProductController : Controller
         
         try{
             await _productService.CreateAsync(p);
+            ViewBag.Message = "Products Created Successfully";
             
         }catch{
             System.Diagnostics.Debug.WriteLine("error add product");

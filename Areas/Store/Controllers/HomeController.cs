@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver.Linq;
 using TDStore.Areas.Store.Models;
 using TDStore.Models;
 using TDStore.Service;
@@ -12,11 +13,15 @@ public class HomeController : Controller
     private readonly ProductService _productService;
     private readonly ImageService _imageService;
 
+
+
     public HomeController(ILogger<HomeController> logger,ProductService productService,ImageService imageService)
+
     {
         _logger = logger;
         _productService = productService;
         _imageService = imageService;
+
     }
 
     public async Task<IActionResult>  Index()
@@ -46,6 +51,55 @@ public class HomeController : Controller
 
         return View(lview);
     }
+    [HttpGet]   
+    public async Task<IActionResult> Collections()
+    {
+        //var data = repositoryProduct.GetAll();
+        //return View(data);
+        List<Product> lst = await _productService.GetAllAsync();
+        List<ProductView> lview = new List<ProductView>();
+        foreach (var item in lst)
+        {
+            List<ImageData>? limg = new List<ImageData>();
+            foreach (var img in item.Images)
+            {
+                limg.Add(await _imageService.GetByIdAsync(img));
+            }
+            lview.Add(new ProductView()
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Details = item.Details,
+                Images = limg,
+                List_Specifications = item.Specifications,
+                Features = item.Features,
+                Category = await _productService.GetAllCategoryOfProduct(item.Id),
+                List_Inventory = await _productService.GetAllInventoryOfProduct(item.Id)
+            });
+
+        }
+
+    
+
+        return View(lview);
+    }
+    public IActionResult ContactUs()
+    {
+        return View();
+    }
+    public IActionResult AboutUs()
+    {
+        return View();
+    }
+    public IActionResult Faq()
+    {
+        return View();
+    }
+    public IActionResult BlogNews() 
+    {
+        return View();
+    }
+
 
     public IActionResult Privacy()
     {
