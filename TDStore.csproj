@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-  <Folder Include="Areas\Store\Controllers\" />
   <Folder Include="Areas\Store\Models\" />
-  <Folder Include="Areas\Store\Views\" />
   <Folder Include="Areas\Admin\Controllers\" />
   <Folder Include="Areas\Admin\Models\" />
   <Folder Include="Areas\Admin\Views\" />

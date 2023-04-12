@@ -2,6 +2,7 @@
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using TDStore.Models;
+using TDStore.Models.Repository;
 using TDStore.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,6 +46,12 @@ builder.Services.ConfigureApplicationCookie(options =>{
 
 builder.Services.AddSingleton<ProductService>();
 builder.Services.AddSingleton<ImageService>();
+builder.Services.AddScoped<TestMongoContext>();
+builder.Services.AddScoped<IRepositoryOder, RepositoryOrder>();
+builder.Services.AddScoped<IRepositoryImage, RepositoryImage>();
+builder.Services.AddScoped<IRepositoryCart, RepositoryCart>();
+builder.Services.AddScoped<IRepositoryProduct, RepositoryProduct>();
+
 
 
 var app = builder.Build();
