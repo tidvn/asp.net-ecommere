@@ -95,10 +95,26 @@ public class HomeController : Controller
 
         if (!string.IsNullOrEmpty(name))
         {
-            lview.Where(x => x.Name == name).OrderBy(x => x.Name);
+            lview.Where(x => x.Name == name).ToList();
         }
 
         return View(lview);
+    }
+    public IActionResult ContactUs()
+    {
+        return View();
+    }
+    public IActionResult AboutUs()
+    {
+        return View();
+    }
+    public IActionResult Faq()
+    {
+        return View();
+    }
+    public IActionResult BlogNews() 
+    {
+        return View();
     }
 
 
