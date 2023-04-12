@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="~/Plainadmin/images/favicon.svg"
+      type="image/x-icon"
+    />
+    <title>@ViewData["Title"] |  TienDung</title>
+
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="~/Plainadmin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Plainadmin/css/lineicons.css" />
+    <link rel="stylesheet" href="~/Plainadmin/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="~/Plainadmin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="~/Plainadmin/css/main.css" asp-append-version="true"/>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    @Html.Partial("Plainadmin/_Sidebar")
+
+    <div class="overlay"></div>
+
+
+
+
+    <main class="main-wrapper">
+      <header class="header">
+            @Html.Partial("Plainadmin/_Header")
+      </header>
+
+
+      
+ 
+        @RenderBody()
+
+
+         <footer class="footer">
+            @Html.Partial("Plainadmin/_Footer")
+      </footer>
+     </main>
+    <script src="~/Plainadmin/js/main.js"></script>
+    <script src="~/Plainadmin/js/bootstrap.bundle.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" ></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

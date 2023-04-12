@@ -1,0 +1,318 @@
+﻿@model TDStore.Areas.Store.Models.ProductView
+<section class="item-details section">
+    <div class="container">
+        <div class="top-area">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="product-images">
+                        <main id="gallery">
+                            <div class="main-img">
+                                <img data-pagespeed-high-res-src="data:@Model.Images[0].FileType;base64,@Convert.ToBase64String(Model.Images[0].Data)"
+                                     id="current" alt="#" data-pagespeed-url-hash="4064215021" src="data:@Model.Images[0].FileType;base64,@Convert.ToBase64String(Model.Images[0].Data)"
+                                     onload="pagespeed.switchToHighResAndMaybeBeacon(this);" onerror="this.onerror=null;pagespeed.switchToHighResAndMaybeBeacon(this);">
+                                @*<img alt="#" src="data:@Model.Images[0].FileType;base64,@Convert.ToBase64String(Model.Images[0].Data)" >*@
+
+                            </div>
+                            <div class="images">
+                                @foreach (var img in Model.Images)
+                                {
+                                    @*<img alt="#" src="data:@img.FileType;base64,@Convert.ToBase64String(img.Data)" class="img" alt="#" >*@
+                                    <img data-pagespeed-high-res-src="data:@img.FileType;base64,@Convert.ToBase64String(img.Data)" class="img" alt="#"
+                                         data-pagespeed-url-hash="652747488" src="data:@img.FileType;base64,@Convert.ToBase64String(img.Data)" onload="pagespeed.switchToHighResAndMaybeBeacon(this);"
+                                         onerror="this.onerror=null;pagespeed.switchToHighResAndMaybeBeacon(this);"  style="opacity: 1;">
+
+                                }
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="product-info">
+                        <h2 class="title">@Model.Name</h2>
+                        <p class="category">
+                            <i class="lni lni-tag"></i> Id:<a href="javascript:void(0)">
+                                @Model.Id
+                            </a>
+                        </p>
+                        <h3 class="price">NOTE<span>$945</span></h3>
+                        <p class="info-text">
+                            @Model.Features
+                        </p>
+                        <div class="row">
+                            @* <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group color-option">
+                            <label class="title-label" for="size">Choose color</label>
+                            <div class="single-checkbox checkbox-style-1">
+                            <input type="checkbox" id="checkbox-1" checked="">
+                            <label for="checkbox-1"><span></span></label>
+                            </div>
+                            <div class="single-checkbox checkbox-style-2">
+                            <input type="checkbox" id="checkbox-2">
+                            <label for="checkbox-2"><span></span></label>
+                            </div>
+                            <div class="single-checkbox checkbox-style-3">
+                            <input type="checkbox" id="checkbox-3">
+                            <label for="checkbox-3"><span></span></label>
+                            </div>
+                            <div class="single-checkbox checkbox-style-4">
+                            <input type="checkbox" id="checkbox-4">
+                            <label for="checkbox-4"><span></span></label>
+                            </div>
+                            </div>
+                            </div> *@
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <div class="form-group">
+                                    <label for="Invname">Choose One to Buy</label>
+                                    <select class="form-control" id="Invname">
+                                        @foreach (var item in Model.List_Inventory)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <div class="form-group">
+                                    <label for="quanty">Quantity</label>
+                                    <input class="form-control" id="quanty" type="number" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-content">
+                            <div class="row align-items-end">
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="button cart-button">
+                                        <button id="addToCart" class="btn" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </div>
+                                @* <div class="col-lg-4 col-md-4 col-12">
+                                <div class="wish-button">
+                                <button class="btn"><i class="lni lni-reload"></i> Compare</button>
+                                </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-12">
+                                <div class="wish-button">
+                                <button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
+                                </div>
+                                </div> *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-details-info">
+            <div class="single-block">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="info-body custom-responsive-margin">
+                            <h4>Details</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.
+                            </p>
+                            <h4>Features</h4>
+                            <ul class="features">
+                                <li>Capture 4K30 Video and 12MP Photos</li>
+                                <li>Game-Style Controller with Touchscreen</li>
+                                <li>View Live Camera Feed</li>
+                                <li>Full Control of HERO6 Black</li>
+                                <li>Use App for Dedicated Camera Operation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="info-body">
+                            <h4>Specifications</h4>
+                            <ul class="normal-list">
+                                <li><span>Weight:</span> 35.5oz (1006g)</li>
+                                <li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>
+                                <li><span>Maximum Distance:</span> Up to 9,840ft (3,000m)</li>
+                                <li><span>Operating Frequency:</span> 2.4GHz</li>
+                                <li><span>Manufacturer:</span> GoPro, USA</li>
+                            </ul>
+                            <h4>Shipping Options:</h4>
+                            <ul class="normal-list">
+                                <li><span>Courier:</span> 2 - 4 days, $22.50</li>
+                                <li><span>Local Shipping:</span> up to one week, $10.00</li>
+                                <li><span>UPS Ground Shipping:</span> 4 - 6 days, $18.00</li>
+                                <li><span>Unishop Global Export:</span> 3 - 4 days, $25.00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-12">
+                    <div class="single-block give-review">
+                        <h4>4.5 (Overall)</h4>
+                        <ul>
+                            <li>
+                                <span>5 stars - 38</span>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                            </li>
+                            <li>
+                                <span>4 stars - 10</span>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star"></i>
+                            </li>
+                            <li>
+                                <span>3 stars - 3</span>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star"></i>
+                                <i class="lni lni-star"></i>
+                            </li>
+                            <li>
+                                <span>2 stars - 1</span>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star"></i>
+                                <i class="lni lni-star"></i>
+                                <i class="lni lni-star"></i>
+                            </li>
+                            <li>
+                                <span>1 star - 0</span>
+                                <i class="lni lni-star-filled"></i>
+                                <i class="lni lni-star"></i>
+                                <i class="lni lni-star"></i>
+                                <i class="lni lni-star"></i>
+                                <i class="lni lni-star"></i>
+                            </li>
+                        </ul>
+
+                        <button type="button" class="btn review-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Leave a Review
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-12">
+                    <div class="single-block">
+                        <div class="reviews">
+                            <h4 class="title">Latest Reviews</h4>
+
+                            <div class="single-review">
+                                <img alt="#" src="~/images/blog/xcomment1.jpg">
+                                <div class="review-info">
+                                    <h4>
+                                        Awesome quality for the price
+                                        <span>
+                                            Jacob Hammond
+                                        </span>
+                                    </h4>
+                                    <ul class="stars">
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor...
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="single-review">
+                                <img alt="#" src="~/images/blog/xcomment2.jpg">
+                                <div class="review-info">
+                                    <h4>
+                                        My husband love his new...
+                                        <span>
+                                            Alex Jaza
+                                        </span>
+                                    </h4>
+                                    <ul class="stars">
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star"></i></li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor...
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="single-review">
+                                <img alt="#" src="~/images/blog/xcomment3.jpg">
+                                <div class="review-info">
+                                    <h4>
+                                        I love the built quality...
+                                        <span>
+                                            Jacob Hammond
+                                        </span>
+                                    </h4>
+                                    <ul class="stars">
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                        <li><i class="lni lni-star-filled"></i></li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor...
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $('body').on('click', '#addToCart', function (e) {
+            e.preventDefault();
+            var quatity = 1;
+            var tQuantity = document.getElementById('quanty').value;
+            if (tQuantity != '') {
+                quatity = parseFloat(tQuantity);
+            }
+            alert("Đã thêm thành công sản phẩm" + " " + quatity);
+
+        });
+        //$ajax({
+        //    url:''
+        //})
+
+        var imgMain = document.querySelector('img#current')
+        var imgElement = document.querySelectorAll('img.img')
+        for (let i in imgElement) {
+            imgElement[i].addEventListener("click", (e) => {
+                imgMain.src = imgElement[i].dataset.pagespeedHighResSrc;
+                imgElement[i].style.opacity = '0.6';
+                console.log(imgElement[i].src)
+            })
+            imgElement[i].addEventListener('mouseout', (e) => {
+                imgElement[i].style.opacity = '1';
+                console.log(imgElement[i].src)
+            });
+            
+        }
+
+    });
+</script>

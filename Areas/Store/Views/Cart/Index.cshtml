@@ -1,0 +1,123 @@
+﻿@model IEnumerable<TDStore.Models.CartItem>
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="cart-list-head">
+
+            <div class="cart-list-title">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-12">
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12">
+                        <p>Product Name</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p>Quantity</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p>Discount</p>
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-12">
+                        <p>Remove</p>
+                    </div>
+                </div>
+            </div>
+            @if (ViewBag.Cart != null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="cart-single-list">
+                        <div class="row align-items-center">
+                            <div class="col-lg-1 col-md-1 col-12">
+                                <a href="product-details.html"><img data-pagespeed-high-res-src="assets/images/cart/x01.jpg.pagespeed.ic.M7WT4pqWxD.webp" alt="#" data-pagespeed-url-hash="2416727865" src="@item.ImageData" onload="pagespeed.switchToHighResAndMaybeBeacon(this);" onerror="this.onerror=null;pagespeed.switchToHighResAndMaybeBeacon(this);"></a>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-12">
+                                <h5 class="product-name">
+                                    <a href="product-details.html">
+                                        @item.Name
+                                    </a>
+                                </h5>
+                                @*<p class="product-des">
+                        <span><em>Type:</em> Mirrorless</span>
+                        <span><em>Color:</em> Black</span>
+                        </p>*@
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <div class="count-input">
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @if (ViewBag.total != null)
+                            {
+                                <div class="col-lg-2 col-md-2 col-12">
+                                    <p>@ViewBag.total</p>
+                                </div>
+                            }
+
+                            <div class="col-lg-2 col-md-2 col-12">
+                                <p>@item.Discount</p>
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-12">
+                                <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="total-amount">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-12">
+                                <div class="left">
+                                    <div class="coupon">
+                                        <form action="#" target="_blank">
+                                            <input name="Coupon" placeholder="Enter Your Coupon">
+                                            <div class="button">
+                                                <button class="btn">Apply Coupon</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="right">
+                                    <ul>
+                                        <li>Cart Subtotal<span>@ViewBag.Total</span></li>
+                                        <li>Shipping<span>Free</span></li>
+                                        <li>You Save<span>@ViewBag.Price</span></li>
+                                        <li class="last">You Pay<span>@ViewBag.total</span></li>
+                                    </ul>
+                                    <div class="button">
+                                        <a href="checkout.html" class="btn">Checkout</a>
+                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            }
+
+            else
+            {
+                <tr>
+                    <th colspan="7">Không có sản phẩm trong giỏ hàng!!</th>
+                </tr>
+            }
+
+
+
+
+        </div>
+    </div>

@@ -1,0 +1,295 @@
+   @model List<Product_Category>
+      <section class="tab-components">
+        <div class="container">
+          
+          <!-- ========== form-layout-wrapper start ========== -->
+          <div class="form-layout-wrapper mt-20">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                  <h6 class="mb-25">Default Information</h6>
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Name of Product</label>
+                          <input type="text" name="Name" placeholder="Name">
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Details</label>
+                          <textarea  name="Details" placeholder="Details"  rows="5"></textarea>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                     <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Category  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+                            Add Category</button></label>
+                            
+                         
+                          <div id="CategoryBage">
+                          </div>
+                          <input class="form-control" id="CategoryInput" list="CategoryList" placeholder="Type to search...">
+                          <datalist id="CategoryList">
+                           @foreach (var category in Model)
+                            {
+                                <option value="@category.Name" data-value="@category.Id"></option>
+                            }
+                          </datalist>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Features</label>
+                         <textarea placeholder="Features" name="Features" rows="5"></textarea>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Images</label>
+                          <input type="file" name="ImageProduct" multiple>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                       <div class="input-style-1">
+                        <label>Specifications</label>
+                        <button type="button" class="btn btn-primary" onclick="addSpec()">Add Specifications</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Value</th>                                   
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="SpecificationsBody">                            
+                        </tbody>
+                    </table>
+                        </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1" >
+                        <label>Inventory</label>
+                        <button type="button" class="btn btn-primary mb-3" onclick="addInv()">Add Inventory</button>
+                          <div class="table-responsive">
+                            <table class="table top-selling-table">
+                              <thead>
+                                <tr>
+                                  <th>
+                                    <h6 class="text-sm text-medium">Name</h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      SKU
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Color
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Quantily
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      Price
+                                    </h6>
+                                  </th>
+                                  <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                      % Discount
+                                    </h6>
+                                  </th>
+                                  
+                                  </th>
+                                  <th>
+                                    <h6 class="text-sm text-medium text-end">
+                                      Actions
+                                    </h6>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody  id="inventoryBody">
+
+
+                              </tbody>
+                            </table>
+                            <!-- End Table -->
+                          
+                        </div>
+                      </div>
+                      </div>
+                      
+                    <!-- end row -->
+                    <button type="submit" class="btn btn-success">Save</button>
+                  </form>
+                </div>
+                <!-- end card -->
+  
+              </div>
+              <!-- end col -->
+  
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== form-layout-wrapper end ========== -->
+        </div>
+        <!-- end container -->
+      </section>
+       <!-- Modal -->
+                          <div class="modal fade" id="createCategoryModal" tabindex="-1"  aria-labelledby="createCategoryModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="createCategoryModalLabel">Create Category</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="createCategoryForm">
+                                      <div class="form-group">
+                                          <label>Name</label>
+                                          <input type="text" id="CategoryName" class="form-control" >
+                                      </div>
+                                      <div class="form-group">
+                                          <label>Description</label>
+                                          <input type="text" id="CategoryDescription" class="form-control">
+                                      </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary" id="createCategoryButton">Create</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+@section Scripts {
+          <script>
+function qs(query, context) {
+   return (context || document).querySelector(query);
+}
+
+function qsa(query, context) {
+   return (context || document).querySelectorAll(query);
+}
+function deleteTr(button) {
+        $(button).closest("tr").remove();
+}
+function deleteBadge(button) {
+        $(button).closest(".CategoryItemSelected").remove();
+}
+
+function checkCategory(id){
+  var rt = true
+ $('.CategoryItemSelected input').each(function() {
+      var value = $(this).val();      
+      if(value == id){
+        rt=false;
+      }
+});
+return rt;
+}
+qs("#CategoryInput").addEventListener('change', function (e) {
+
+    var options = qsa( 'option', qs('#' + e.target.getAttribute('list')) ),
+        values = [];
+    [].forEach.call(options, function (option) {
+        values.push(option.value)
+       
+    });
+    var currentValue = e.target.value;
+    var currentId = $('#CategoryList option[value="' + $(this).val() + '"]').data('value');
+    
+  
+    if (values.indexOf(currentValue) !== -1 && checkCategory(currentId)) {
+        var Item=`<div class="CategoryItemSelected d-inline-block"><input type="hidden"name="Category[]" value="${currentId}"><span class="status-btn success-btn mx-1 my-1">${currentValue}<button type="button" class="btn-close" onclick="deleteBadge(this)" aria-label="Close"></button></span></div>`;
+        $("#CategoryBage").append(Item)
+    }
+     $("#CategoryInput").val("")
+
+});
+
+$(document).ready(function () {
+        $('#createCategoryButton').click(function () {
+            // get the form data
+            var formData = {
+                name: $('#CategoryName').val(),
+                description: $('#CategoryDescription').val()
+            };
+
+            // send AJAX request
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddCategory", "Product")',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+                dataType: 'json',
+                encode: true
+            }).done(function (data) {
+                    if (data.success) {
+                      
+                        $('#CategoryList').append(`<option value="${data.category.name}" data-value="${data.category.id}"></option>`);
+
+                      $('#createCategoryModal').modal('hide');
+                       $('body').removeClass('modal-open');
+                       $('.modal-backdrop').remove();
+                    } else {
+                        // handle error
+                    }
+                });
+        });
+});
+
+function getSpecIndex() {
+        return $("#SpecificationsBody tr").length;
+}
+function getInvIndex() {
+        return $("#inventoryBody tr").length;
+}
+
+function addSpec() {
+var row = '<tr>' +
+'<td><input type="text" name="List_Specifications[' + getSpecIndex() + '].Key" class="form-control" /></td>' +
+'<td><input type="text" name="List_Specifications[' + getSpecIndex() + '].Value" class="form-control" /></td>' +
+'<td><div class="action justify-content-end">'+
+'                                      <button class="Remove"  onclick="deleteTr(this)">'+
+'                                        <i class="lni lni-trash-can"></i>'+
+'                                      </button></div></td></tr>';
+ $("#SpecificationsBody").append(row);
+}
+function addInv() {
+var Table = $("#inventoryBody");
+var Row=
+'<tr>'+
+'                                  <td>'+
+'                                    <div class="product"><p class="text-sm"><input  name="List_Inventory[' + getInvIndex() + '].Name" class="form-control" type="text" ></p></div>'+
+'                                  </td>'+
+'                                  <td><input  name="List_Inventory[' + getInvIndex() + '].SKU" class="form-control" type="text" ></td>'+
+'                                  <td><input  name="List_Inventory[' + getInvIndex() + '].Color" class="form-control" type="text" ></td>'+
+'                                <td><input  name="List_Inventory[' + getInvIndex() + '].Quantily" class="form-control" type="text" ></td>'+
+'                                <td><input  name="List_Inventory[' + getInvIndex() + '].Price" class="form-control" type="text" ></td>'+
+'                                <td><input  name="List_Inventory[' + getInvIndex() + '].Discount_Percent" class="form-control" type="text" ></td>'+
+'                                  <td>'+
+'                                    <div class="action justify-content-end">'+
+'                                      <button class="Remove"  onclick="deleteTr(this)">'+
+'                                        <i class="lni lni-trash-can"></i>'+
+'                                      </button>'+
+'                                      '+
+'                                    </div>'+
+'                                  </td>'+
+'                                </tr>';
+	
+
+Table.append(Row );
+}
+</script>
+}
