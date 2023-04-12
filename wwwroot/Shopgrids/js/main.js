@@ -1,5 +1,5 @@
 /*
-Template Name: ShopGrids - Bootstrap 5 eCommerce HTML Template.
+Template Name: TD Store
 Author: GrayGrids
 */
 

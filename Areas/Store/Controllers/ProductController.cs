@@ -22,7 +22,9 @@ public class ProductController : Controller
     public async Task<IActionResult> Details(string id)
     {
         Product item = await _productService.GetByIdAsync(id);
-        
+        if(item == null){
+               return RedirectToAction("Index", "Home");
+        }
         List<ImageData>? limg = new List<ImageData>();
         foreach (var img in item.Images){
             limg.Add(await _imageService.GetByIdAsync(img));

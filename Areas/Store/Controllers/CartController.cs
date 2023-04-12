@@ -24,83 +24,96 @@ namespace TDStore.Areas.Shop.Controllers
         public async Task<IActionResult> Index()
         {
             var cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-            
-            List<dynamic> list = new List<dynamic>();    
-
-            if (cart != null)
-            {
-                foreach (var item in cart)
-                {
-                    var image = item.ImageData;
-                    dynamic myObject = new System.Dynamic.ExpandoObject();
-                    myObject.Inventory = item.Inventory;
-                    myObject.Image = "data:"+image.FileType+"; base64,"+ @Convert.ToBase64String(image.Data); //; 
-                    myObject.Quantity = item.Quantity;
-                    myObject.Discount = item.Discount;
-                    list.Add(myObject);
-                }
-                ViewBag.Cart = list;    
-                ViewBag.total = cart.Sum(item => item.Inventory.Price * item.Quantity - item.Discount);
+            if (cart == null){
+               ViewBag.total = 0 ;
+            }else{
+                ViewBag.total = cart.Sum(item => item.Price*item.Quantity);
             }
-            return View();
+            
+            
+            
+            // List<dynamic> list = new List<dynamic>();    
+
+            // if (cart != null)
+            // {
+            //     foreach (var item in cart)
+            //     {
+            //         var image = item.ImageData;
+            //         dynamic myObject = new System.Dynamic.ExpandoObject();
+            //         myObject.Inventory = item.Inventory;
+            //         myObject.Image = "data:"+image.FileType+"; base64,"+ @Convert.ToBase64String(image.Data); //; 
+            //         myObject.Quantity = item.Quantity;
+            //         myObject.Discount = item.Discount;
+            //         list.Add(myObject);
+            //     }
+            //     ViewBag.Cart = list;    
+            //     ViewBag.total = cart.Sum(item => item.Inventory.Price * item.Quantity - item.Discount);
+            // }
+            return View(cart);
         }
 
-        public async Task<IActionResult> AddToCart(string idProduct,string idInventory,string Quantily)
+        [HttpPost]
+        public async Task<IActionResult> AddToCart([FromBody] CartAdd item)
         {
-            var product = await _ProductService.GetByIdAsync(idProduct);
+            var product = await _ProductService.GetByIdAsync(item.idProduct);
             var image = await _ImageService.GetByIdAsync(product.Images[0]);
-            var inventory = await _ProductService.GetInventoryByIdAsync(idInventory);
+            var inventory = await _ProductService.GetInventoryByIdAsync(item.idInventory);
 
 
             if (inventory.Quantily <= 0)
-                return RedirectToAction("Index", "Shop");
+               return Json(new { success = false});
 
             if (SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart") == null)
             {
                 List<CartItem> cart = new List<CartItem>();
                 
                 cart.Add(new CartItem
-                {   Name = product.Name,
+                {  
+                    ID = inventory.Id,
+                    Name = product.Name,
                     ImageData = image,
                     Inventory = inventory,
-                    Quantity = 1,
-                    Discount = 0
+                    Quantity = item.quantily,
+                    Price = inventory.Price-((inventory.Discount_Percent*inventory.Price)/100),
+                    Discount = inventory.Discount_Percent
                 });
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             else
             {
                 List<CartItem> cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-                int index = isExist(idInventory);
+                int index = isExist(item.idInventory);
                 if (index != -1)
                 {
-                    cart[index].Quantity++;
+                    cart[index].Quantity+= item.quantily;
                 }
                 else
                 {
                     cart.Add(new CartItem
                     {
+                        ID = inventory.Id,
                         ImageData = image,
                         Inventory = inventory,
-                        Quantity = 1,
-                        Discount = 0
+                        Quantity = item.quantily,
+                        Price = inventory.Price-((inventory.Discount_Percent*inventory.Price)/100),
+                        Discount = inventory.Discount_Percent
                     });
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
-            return RedirectToAction("Index","Shop");
+           return Json(new { success = true});
         }
-
-      //   public IActionResult RemoveFromCart(string id)
-      //   {
-      //       List<CartItem> cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-      //       var item = cart.FirstOrDefault(i => i.Product.Id == id);
-      //       int index = isExist(id);
-      //       if (index != -1 && cart[index].Quantity > 1)
-      //           cart[index].Quantity--;
-      //       SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-      //       return RedirectToAction("Index");
-      //   }
+        [HttpPost]
+        public IActionResult RemoveFromCart([FromBody] CartItem c)
+        {
+            List<CartItem> cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
+            var item = cart.FirstOrDefault(i => i.ID == c.ID);
+            int index = isExist(c.ID);
+            if (index != -1 && cart[index].Quantity >= 1){cart.RemoveAt(index);}               
+                
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+             return Json(new { success = true});
+        }
 
       //   public IActionResult subOne(string id)
       //   {
@@ -127,7 +140,7 @@ namespace TDStore.Areas.Shop.Controllers
             List<CartItem> cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
             for (int i = 0; i < cart.Count; i++)
             {
-                if (cart[i].Inventory.Id.Equals(id))
+                if (cart[i].ID.Equals(id))
                 {
                     return i;
                 }
